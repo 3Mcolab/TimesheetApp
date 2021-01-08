@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> View sheet </title>
+    <meta property="og:title" content="Basic Table">
+    <meta property="og:locale" content="en_US">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/profile_pics/tradepeer_new_logo.png">
+    <link rel="shortcut icon" href="/static/profile_pics/tradepeer_new_logo.png">
+    <meta name="theme-color" content="#3063A0">
+    <!-- End FAVICONS -->
+    <script src="/static/assets/vendor/pace/pace.min.js"></script>
+    <!-- BEGIN BASE STYLES -->
+    <link rel="stylesheet" href="/static/assets/vendor/pace/pace.min.css">
+    <link rel="stylesheet" href="/static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/static/assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/vendor/fontawesome/css/fontawesome.all.css">
+    <!-- END BASE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="/static/assets/stylesheets/main.min.css">
+    <link rel="stylesheet" href="/static/assets/stylesheets/custom.css">
+    <link rel="stylesheet" href="/static/assets/vendor/flatpickr/flatpickr.min.css">
+    <!-- END THEME STYLES -->
+  </head>
+  <body>
+    <!-- .app -->
+    <div class="app">
+      <!-- .app-header -->
+      <header class="app-header">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="#">
+              <img src="/static/assets/images/rycon_logo.png" height="32" alt="">
+            </a>
+          </div>
+          <!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+              <!-- /toggle menu -->
+            </div>
+            <!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-full">
+              <!-- .top-bar-search -->
+              <div class="top-bar-search">
+                <div class="input-group input-group-search">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <span class="oi oi-magnifying-glass"></span>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search"> </div>
+              </div>
+              <!-- /.top-bar-search -->
+            </div>
+            <!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+              <div class="dropdown">
+                <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="user-avatar">
+                    <img src="/static/assets/images/avatars/profile.png" alt="">
+                  </span>
+                  <span class="account-summary pr-lg-4 d-none d-lg-block">
+                    <span class="account-name">{{current_user.firstname}} {{current_user.lastname}}</span>
+                    <span class="account-description">{{current_user.position}}</span>
+                  </span>
+                </button>
+                <div class="dropdown-arrow dropdown-arrow-left"></div>
+                <!-- .dropdown-menu -->
+                <div class="dropdown-menu">
+                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> {{current_user.firstname}} {{current_user.lastname}}  </h6>
+                  <a class="dropdown-item" href="{{url_for('users.profile_selection')}}">
+                    <span class="dropdown-icon fas fa-users-cog"></span> Profile Setting</a>
+                    <a class="dropdown-item" href="{{url_for('adminDash.dash_admin')}}">
+                      <span class="dropdown-icon fas fa-user-lock"></span> Admin Dashboard</a>
+                  <a class="dropdown-item" href="{{url_for('users.logout')}}">
+                    <span class="dropdown-icon fas fa-sign-out-alt"></span> Logout</a>
+              </div>
+              <!-- /.btn-account -->
+            </div>
+            <!-- /.top-bar-item -->
+          </div>
+          <!-- /.top-bar-list -->
+        </div>
+        <!-- /.top-bar -->
+      </header>
+      <!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-header -->
+          <header class="aside-header d-block d-md-none">
+            <!-- .btn-account -->
+            <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
+              <span class="user-avatar user-avatar-lg">
+                <img src="/static/assets/images/avatars/profile.png" alt="">
+              </span>
+              <span class="account-icon">
+                <span class="fa fa-caret-down fa-lg"></span>
+              </span>
+              <span class="account-summary">
+                <span class="account-name">{{current_user.firstname}} {{current_user.lastname}}</span>
+                <span class="account-description">{{current_user.position}}</span>
+              </span>
+            </button>
+            <!-- /.btn-account -->
+            <!-- .dropdown-aside -->
+            <div id="dropdown-aside" class="dropdown-aside collapse">
+              <!-- dropdown-items -->
+              <div class="pb-3">
+                <a class="dropdown-item" href="{{url_for('users.profile_selection')}}">
+                  <span class="dropdown-icon fas fa-users-cog"></span> Profile Setting</a>
+                  <a class="dropdown-item" href="{{url_for('adminDash.dash_admin')}}">
+                    <span class="dropdown-icon fas fa-user-lock"></span> Admin Dashboard</a>
+                <a class="dropdown-item" href="{{url_for('users.logout')}}">
+                  <span class="dropdown-icon fas fa-sign-out-alt"></span> Logout</a>
+                <div class="dropdown-divider"></div>
+              </div>
+              <!-- /dropdown-items -->
+            </div>
+            <!-- /.dropdown-aside -->
+          </header>
+          <!-- /.aside-header -->
+          <!-- .aside-menu -->
+          <section class="aside-menu has-scrollable">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <!-- .menu-item -->
+                <li class="menu-item">
+                  <a href="{{url_for('employees.dashboard')}}" class="menu-link">
+                    <span class="menu-icon fas fa-desktop"></span>
+                    <span class="menu-text">My Dashboard</span>
+                  </a>
+                </li>
+
+                <li class="menu-item has-child">
+                  <a href="#" class="menu-link">
+                    <span class="menu-icon fas fa-calendar-alt"></span>
+                    <span class="menu-text">Schedule</span>
+                  </a>
+                  <!-- child menu -->
+                  <ul class="menu">
+                    <li class="menu-item">
+                      <a href="{{url_for('employees.task_read_user',username=current_user.username)}}" class="menu-link">Daily View</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('employees.weekly_view_task_user',username=current_user.username)}}" class="menu-link">Weekly View</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="menu-item has-child">
+                  <a href="#" class="menu-link">
+                    <span class="menu-icon fas fa-tachometer-alt"></span>
+                    <span class="menu-text">Time Entries</span>
+                  </a>
+                  <!-- child menu -->
+                  <ul class="menu">
+                    <li class="menu-item">
+                      <a href="{{url_for('employees.clockinout')}}" class="menu-link">Post</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('employees.timesheet_userlogin',username=current_user.username,sheet_inx='default_week')}}" class="menu-link">View</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item has-child">
+                  <a href="#" class="menu-link">
+                    <span class="menu-icon far fa-calendar"></span>
+                    <span class="menu-text">Leave Requests</span>
+                  </a>
+                  <!-- child menu -->
+                  <ul class="menu">
+                    <li class="menu-item">
+                      <a href="{{url_for('employees.leave')}}" class="menu-link">Post</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('employees.leave_userlogin',username=current_user.username,sheet_inx='default_week')}}" class="menu-link">View</a>
+                    </li>
+                  </ul>
+                </li>
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link">
+                  <span class="menu-icon fas fa-donate"></span>
+                  <span class="menu-text">Reimbursements</span>
+                </a>
+                <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{{url_for('employees.invoice')}}" class="menu-link">Post</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('employees.invoice_userlogin',username=current_user.username,sheet_inx='default_week')}}" class="menu-link">View</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link">
+                  <span class="menu-icon fas fa-user-ninja"></span>
+                  <span class="menu-text">Job Safety</span>
+                </a>
+                <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{{url_for('jobsafety.jobsafety_step1',username=current_user.username)}}" class="menu-link">Post</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('jobsafety.view_jobsafety',username=current_user.username)}}" class="menu-link">View</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link">
+                  <span class="menu-icon fas fa-toolbox"></span>
+                  <span class="menu-text">Tool Inventory</span>
+                </a>
+                <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.create_inventory_step1',username=current_user.username)}}" class="menu-link">Create Item</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.barcode_decode_user')}}" class="menu-link">Scan Item</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.view_inventory_all',username=current_user.username)}}" class="menu-link">Find Item</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.history_view_all',username=current_user.username)}}" class="menu-link">Track Item</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.create_inventory_qrcodereader')}}" class="menu-link">Create Barcode Item</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link">
+                  <span class="menu-icon fas fa-project-diagram"></span>
+                  <span class="menu-text">Project</span>
+                </a>                  <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{{url_for('employees.create_project_user')}}" class="menu-link">Create</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('employees.view_allproject_user')}}" class="menu-link">Ongoing</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('employees.view_archive_project_user')}}" class="menu-link">Archive</a>
+                  </li>
+                </ul>
+              </li>
+                </li>
+                <li class="menu-item">
+                  <a href="{{url_for('employees.enquiry_post_user')}}" class="menu-link">
+                    <span class="menu-icon fas fa-share-square"></span>
+                    <span class="menu-text">Report Error</span>
+                  </a>
+                </li>
+              </ul>
+              <!-- /.menu -->
+            </nav>
+            <!-- /.stacked-menu -->
+          </section>
+          <!-- /.aside-menu -->
+        </div>
+        <!-- /.aside-content -->
+      </aside>
+      <!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+              <div class="page-inner">
+                {% include 'includes/_messages.html' %}
+                {% block content %}
+
+                {% endblock %}
+              </div>
+          </div>
+        </div>
+
+      </main>
+      <!-- /.app-main -->
+    </div>
+    <!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="/static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/popper.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="/static/assets/vendor/stacked-menu/stacked-menu.min.js"></script>
+    <script src="/static/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="/static/assets/javascript/main.min.js"></script>
+    <script src="/static/assets/javascript/pages/table-demo.js"></script>
+    <script src="/static/assets/vendor/flatpickr/flatpickr.min.js"></script>
+    <script src="/static/assets/javascript/pages/flatpickr-demo.js"></script>
+    <!-- END THEME JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="/static/assets/javascript/pages/table-demo.js"></script>
+    <!-- END PAGE LEVEL JS -->
+  </body>
+</html>

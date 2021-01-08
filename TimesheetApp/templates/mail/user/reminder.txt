@@ -1,0 +1,6 @@
+{% extends "mail/base.txt" %}
+
+{% block body %}
+<p>Hi {{ user.username }}! {{message_email}}.</p>
+Thank you.
+{% endblock %}

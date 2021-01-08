@@ -1,0 +1,11 @@
+{% extends "mail/base.txt" %}
+
+{% block body %}
+<p>Hi {{ user.username }}! Your task assigned has been modified for {{day}}. Here are the changes:</p>
+
+   Project:{{project}}
+   Start Time: {{time_in}}
+   End Time: {{time_out}} 
+   Comment: {{comment}}
+
+{% endblock %}

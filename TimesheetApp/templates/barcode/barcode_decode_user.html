@@ -1,0 +1,233 @@
+{% extends "/users/basic_input.html" %}
+{% block content %}
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{{url_for('barcode.view_inventory_all',username=current_user.username)}}">
+                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Decode Inventory</a>
+                    </li>
+                  </ol>
+                </nav>
+                <span><font size="6">Decode Inventory</font></span>
+              </header>
+              <!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <div class="d-xl-none">
+                  <button class="btn btn-danger btn-floated" type="button" data-toggle="sidebar">
+                    <i class="fa fa-th-list"></i>
+                  </button>
+                </div>
+                <!-- .card -->
+                <section id="base-style" class="card">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <!-- .form -->
+                    <form  class=""  action="#">
+                      <!-- .fieldset -->
+                      <fieldset>
+                        <div id="container">
+                            <h6>Scan Qrcode</h6>
+
+                            <div class="">
+                                <label for="audioSource"></label><select id="audioSource"></select>
+                            </div>
+                            <div class="video-field">
+                                <div id="result_strip">
+                                    <ul class="thumbnails"></ul>
+                                </div>
+                        {#                <div class="decoration"></div>#}
+                                <div class="select">
+                                    <label for="videoSource"><i class=''></i></label><select id="videoSource"></select>
+                                </div>
+                                <video id="video" muted autoplay></video>
+                                <button id="startbutton"><i class='fas fa-video'>Click</i></button>
+                            </div>
+
+                        {#            <div id="interactive" class="viewport"><video autoplay="true" preload="auto" src="" muted="true" playsinline="true"></video>#}
+                            <ul id="decoded"></ul>
+
+                            <canvas id="canvas" class="drawingBuffer"></canvas><br clear="all"></div>
+                             <p>*Requires Chrome 30 or later.</p>
+
+                <!-- /.form-group -->
+                      </fieldset>
+
+                    </form
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        {#            <script src="/static/js/quagga.min.js"></script>#}
+
+        <script>
+        //initiate the time
+        var date1 = new Date();
+        var videoElement = document.querySelector('video');
+        var audioSelect = document.querySelector('select#audioSource');
+        var videoSelect = document.querySelector('select#videoSource');
+        var canvas = document.querySelector('#canvas');
+        var video= document.querySelector('#video');
+        var Result = $("#result_strip");
+
+
+        navigator.mediaDevices.enumerateDevices()
+        .then(gotDevices).then(getStream).catch(handleError);
+
+        audioSelect.onchange = getStream;
+        videoSelect.onchange = getStream;
+
+        function gotDevices(deviceInfos) {
+        for (var i = 0; i !== deviceInfos.length; ++i) {
+        var deviceInfo = deviceInfos[i];
+        var option = document.createElement('option');
+        option.value = deviceInfo.deviceId;
+        if (deviceInfo.kind === 'audioinput') {
+        option.text = deviceInfo.label ||
+        'microphone ' + (audioSelect.length + 1);
+        audioSelect.appendChild(option);
+        } else if (deviceInfo.kind === 'videoinput') {
+        option.text = deviceInfo.label || 'camera ' +
+        (videoSelect.length + 1);
+        videoSelect.appendChild(option);
+        } else {
+        console.log('Found one other kind of source/device: ', deviceInfo);
+        }
+        }
+        }
+
+        function getStream() {
+        if (window.stream) {
+        window.stream.getTracks().forEach(function(track) {
+        track.stop();
+        });
+        }
+        var widthVideo = function(){
+        if (window.innerWidth < 600){
+        return window.innerWidth;
+        }
+        else{
+        return 500;
+        }
+        };
+        var heightVideo = function(){
+        if (window.innerHeight < 800 && window.innerWidth < 600){
+        return window.innerHeight;
+        }
+        else{
+        return 600;
+        }
+        };
+        var constraints = {
+        audio: {
+        deviceId: {exact: audioSelect.value}
+        },
+        video: {
+        deviceId: {exact: videoSelect.value},
+        width:widthVideo(),
+        height:heightVideo()
+        }
+        };
+
+        navigator.mediaDevices.getUserMedia(constraints).
+        then(gotStream).catch(handleError);
+        }
+
+        function gotStream(stream) {
+        window.stream = stream; // make stream available to console
+        videoElement.srcObject = stream;
+        }
+
+        function handleError(error) {
+        console.log('Error: ', error);
+        }
+
+
+
+        function takepicture() {
+
+        var widthVideo = function(){
+        if (window.innerWidth < 600){
+        return window.innerWidth;
+        }
+        else{
+        return 500;
+        }
+        };
+        var heightVideo = function(){
+        if (window.innerHeight < 800 && window.innerWidth < 600){
+        return window.innerHeight;
+        }
+        else{
+        return 600;
+        }
+        };
+
+        var width = widthVideo();
+        var height = heightVideo();
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+        var dataUrl = canvas.toDataURL('image/jpg');
+        // console.log(dataUrl);
+        $.ajax({
+        type: "POST",
+        url: "{{url_for('barcode.decode')}}",
+        data: {
+        imgBase64: dataUrl
+        }
+        }).done(function(data) {
+
+        if(data.code =='NO BarCode Found'){
+
+
+        console.log("Trying..")
+        var interval = setTimeout(function(){
+
+            var date2 = new Date();
+            var diff = date2 - date1;
+            if(diff > 100000){
+
+                Result.html('Try Again : Time Out');
+                clearTimeout(interval);
+
+            }
+
+            $('#startbutton').click();
+
+
+        },2000);
+
+
+        }
+        else{
+        window.location.href = "{{url_for('barcode.extract_qcode',username=current_user.username)}}";
+        console.log(data.code);
+        var obj = JSON.parse(data);
+        var i;
+        Result.html('<b>Detected</b> :)<ol>');
+        for(i=0; i<obj.length;i++){
+            Result.append("<li><ul><li>Code: <b>"+obj[i].code+"</b></li><li>Type: <b>"+obj[i].type+"</b></li></ul></li>");
+        }
+        Result.append("</ol>")
+        window.navigator.vibrate(200);
+        clearTimeout(interval);
+        }
+
+        // Do Any thing you want
+        })
+        .fail(function(){
+        console.log('Failed')
+        });
+
+        }
+        startbutton.addEventListener('click', function(ev){
+        takepicture();
+        Result.html("");
+        ev.preventDefault();
+        }, false);
+
+        </script>
+
+        {% include 'includes/script.html'%}
+
+{% endblock %}

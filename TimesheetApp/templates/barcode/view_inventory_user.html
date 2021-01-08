@@ -1,0 +1,64 @@
+{% extends "/users/basic_timesheet.html" %}
+{% block content %}
+              <header class="page-title-bar">
+                <!-- .breadcrumb -->
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{{url_for('barcode.create_inventory_step1',username=current_user.username)}}">
+                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Inventory View </a>
+                    </li>
+                  </ol>
+                </nav>
+                <!-- /.breadcrumb -->
+                <!-- floating action -->
+                <button type="button" class="btn btn-success btn-floated">
+                  <span class="fa fa-plus"></span>
+                </button>
+                <!-- /floating action -->
+                <!-- title and toolbar -->
+                <div class="d-md-flex align-items-md-start">
+                  <h1 class="page-title mr-sm-auto"> Inventory View </h1>
+                </div>
+                <!-- /title and toolbar -->
+              </header>
+              <!-- section-deck -->
+              <div class="section-deck">
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <header class="card-header"> Database </header>
+                  <!-- .lits-group -->
+                  <div class="lits-group list-group-flush">
+                    <!-- .lits-group-item -->
+                  {% for post_sum in post_submit%}
+                    <div class="list-group-item">
+                      <!-- .lits-group-item-figure -->
+                      <div class="list-group-item-figure">
+                        <div class="has-badge">
+                          <a href="{{url_for('barcode.history_qrcode_user',post_id=post_sum.id)}}" class="tile tile-md bg-{{color_all[loop.index]}}">{{post_sum.item_code_add}}</a>
+                          <span class="text-muted mx-2">
+                          </span>
+                        </div>
+                      </div>
+                      <!-- .lits-group-item-figure -->
+                      <!-- .lits-group-item-body -->
+                      <div class="list-group-item-body">
+                        <h5 class="card-title mb-2">
+                          <a href="{{url_for('barcode.history_qrcode_user',post_id=post_sum.id)}}">{{post_sum.item_serial_num}} <font class="card-subtitle text-muted">{{post_sum.item_add}}</font></a>
+                        </h5>
+                      <p class="card-subtitle text-muted">{{post_sum.asset_add}},{{post_sum.location_item}}</p>
+                      <p class="card-subtitle text-muted">{{post_sum.created_by}},{{post_sum.date_created.strftime('%d/%m/%Y')}}</p>
+                        <!-- /.progress -->
+                      </div>
+                      <!-- .lits-group-item-body -->
+                    </div>
+                  {%endfor%}
+                  </div>
+                </div>
+              </div>
+              <!-- section-deck -->
+              <!-- section-deck -->
+
+
+
+{% endblock %}

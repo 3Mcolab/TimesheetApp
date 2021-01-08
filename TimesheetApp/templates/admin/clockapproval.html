@@ -1,0 +1,177 @@
+{% extends "/admin/basic.html" %}
+{% block content %}
+<header class="page-title-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">
+        <a href="{{url_for('adminDash.clockpost_user')}}">
+          <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Clock In-Out Approval</a>
+      </li>
+    </ol>
+  </nav>
+  <h1 class="page-title"> Approval Request for Timesheet</h1>
+</header>
+<div class="page-section">
+  <!-- grid row -->
+  <div class="row">
+    <!-- grid column -->
+    <div class="col-lg-2 col-xl-10">
+      <!-- .card -->
+      <div class="card card-fluid">
+        <!-- .card-header -->
+        <!-- /.card-header -->
+        <!-- .card-body -->
+        <div class="card-body text-center">
+          <!-- avatars -->
+          <div class="has-badge mb-3">
+            <a href="#" class="tile tile-lg bg-blue">xx</a>
+            <a href="#" class="user-avatar user-avatar-xs">
+              <img src="assets/images/avatars/team1.jpg" alt="">
+            </a>
+          </div>
+          <!-- /avatars -->
+          <!-- /.media -->
+          <h5 class="card-title">
+            <a href="#">Approval Request of {{current_user.firstname}} {{current_user.lastname}}</a>
+          </h5>
+          <header class="card-header border-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="text-muted font-weight-normal small">  </div>
+            </div>
+          </header>
+
+              <div class="table-responsive">
+                <!-- .table -->
+                <table class="table table-hover">
+                  <!-- thead -->
+                  <thead class="thead-dark">
+                    <tr>
+                      <th style="min-width:15px"> Request </th>
+                      <th> Remarks </th>
+                    </tr>
+                  </thead>
+                  <!-- /thead -->
+                  <!-- tbody -->
+                  <tbody>
+                    <!-- tr -->
+                    <tr>
+                      <td> Project </td>
+                      <td> {{post_data.project}} </td>
+                    </tr>
+                    <!-- /tr -->
+                    <!-- tr -->
+                    <tr>
+                      <td> Task </td>
+                      <td> {{post_data.task}} </td>
+                    </tr>
+                    <!-- /tr -->
+                    <!-- tr -->
+                    <tr>
+                      <td> Day </td>
+                      <td>{{post_data.day_clock}}  </td>
+                    </tr>
+                    <!-- /tr -->
+                    <!-- tr -->
+                    <tr>
+                      <td> Clock In Time </td>
+                      <td> {{post_data.clock_in}} </td>
+                    </tr>
+                    <!-- /tr -->
+                    <!-- tr -->
+                    <tr>
+                      <td> Clock Out Time </td>
+                      <td>{{post_data.clock_out}}  </td>
+                    </tr>
+                    <tr>
+                      <td> Travel?</td>
+                      <td> {{post_data.travel_choice}} </td>
+                    </tr>
+                    <tr>
+                      <td> Travel Distance </td>
+                      <td> {{post_data.distance}} </td>
+                    </tr>
+                    <tr>
+                      <td> Where From? </td>
+                      <td> {{post_data.location}} </td>
+                    </tr>
+                    <tr>
+                      <td> Comment </td>
+                      <td> {{post_data.comment}} </td>
+                    </tr>
+                    <!-- /tr -->
+                  </tbody>
+                  <!-- /tbody -->
+                </table>
+                <!-- /.table -->
+              </div>
+              <!-- /.table-responsive -->
+            </section>
+            <!-- /.card -->
+          </div>
+          <!-- /grid column -->
+
+          <footer class="card-footer">
+            <div class="el-example">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#del_modal_apv">Approve</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal_rej">Reject</button>
+            </div>
+          </footer>
+          <!-- Modal for Pop Up-->
+          {# https://getbootstrap.com/docs/4.1/components/modal/ #}
+          {# Notice how the link with the id to the button above! #}
+          <div class="modal" tabindex="-1" role="dialog" id="del_modal_rej">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Timesheets Approval of {{current_user.firstname}} {{current_user.lastname}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to reject the timesheets?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <form action="{{url_for('adminDash.clock_reject',clock_post_id=post_data.id)}}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Reject">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        {# https://getbootstrap.com/docs/4.1/components/modal/ #}
+        {# Notice how the link with the id to the button above! #}
+        <div class="modal" tabindex="-1" role="dialog" id="del_modal_apv">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Timesheets Approval of {{current_user.firstname}} {{current_user.lastname}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to approve the timesheets?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form action="{{url_for('adminDash.clock_accept',clock_post_id=post_data.id)}}" method="POST">
+                  <input class="btn btn-primary" type="submit" value="Approve">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- /.progress -->
+      </div>
+      <!-- /.card -->
+    </div>
+
+    <!-- /grid column -->
+    <!-- grid column -->
+{% endblock %}

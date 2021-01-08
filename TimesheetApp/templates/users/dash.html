@@ -1,0 +1,119 @@
+{% extends "/users/basic_message.html" %}
+{% block content %}
+<header class="page-title-bar">
+  <p class="lead">
+    <span class="font-weight-bold">Hi, {{ current_user.firstname}}</span>
+    <br>
+    <span class="font-weight-bold">{{ message_card}}</span>
+    <span class="d-block text-muted">Welcome to Notice Board.</span>
+    {% if current_user.last_seen %}
+    <p>Last visited on:{{ moment(current_user.last_seen).format('LLL') }}</p>
+    {% endif %}
+  </p>
+</header>
+
+{% for post in message_post.items %}
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- .card -->
+              {% if post.body_status=='read' %}
+                <section class="card text-white bg-secondary mb-3">
+              {% elif post.body_trans=='timesheet' %}
+                <section class="card text-white bg-warning mb-3">
+              {% elif post.body_trans=='leave_request' %}
+                <section class="card text-white bg-danger mb-3">
+              {% elif post.body_trans=='invoice_request' %}
+                <section class="card text-white bg-success mb-3">
+              {%elif post.body_trans=='inventory_request'%}
+              <section class="card text-white bg-warning mb-3">
+              {%elif post.body_trans=='inventory_request_ack'%}
+                <section class="card text-white bg-success mb-3">
+              {%elif post.body_trans=='report_item_condition'%}
+              <section class="card text-white bg-warning mb-3">
+              {%else%}
+                <section class="card text-white bg-secondary mb-3">
+              {%endif%}
+                  <!-- .list-group-messages -->
+                  <div class="list-group list-group-messages list-group-flush list-group-bordered">
+                    <!-- message item -->
+                  {% if post.body_status=='unread' %}
+                    <div class="list-group-item unread">
+                  {%else%}
+                    <div class="list-group-item read">
+                  {%endif%}
+                      <!-- message body -->
+                      <div class="list-group-item-body pl-md-0">
+                        <!-- grid row -->
+                        <div class="row">
+                          <!-- grid column -->
+                          <div class="col">
+                            <h4 class="list-group-item-title">
+                              <a href="{{url_for('employees.message_read_user',username=current_user.username,mes_post_id=post.id)}}">{{post.body_title}}</a>
+                            </h4>
+                            <p class="list-group-item-text"> {{post.body_message}} </p>
+                          </div>
+                          <!-- /grid column -->
+                          <!-- grid column -->
+                          <div class="col-12 col-lg-2 text-lg-right">
+                            <p class="list-group-item-text"> {{ moment(post.date).fromNow()}} </p>
+                          </div>
+                          <!-- /grid column -->
+                        </div>
+                        <!-- /grid row -->
+                      </div>
+                      <!-- /message body -->
+                      <!-- message actions -->
+                      <div class="list-group-item-figure">
+                        <!-- .dropdown -->
+                        <div class="dropdown">
+                          <button class="btn btn-reset px-2" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                          </button>
+                          <div class="dropdown-arrow"></div>
+                          <!-- .dropdown-menu -->
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <a href="{{url_for('employees.message_read_user',username=current_user.username,mes_post_id=post.id)}}" class="dropdown-item">Mark as read</a>
+                            <a href="{{url_for('employees.message_unread_user',username=current_user.username,mes_post_id=post.id)}}" class="dropdown-item">Mark as unread</a>
+                            <a href="{{url_for('employees.message_trash_user',username=current_user.username,mes_post_id=post.id)}}" class="dropdown-item">Trash</a>
+                          </div>
+                          <!-- /.dropdown-menu -->
+                        </div>
+                        <!-- /.dropdown -->
+                      </div>
+                      <!-- /message actions -->
+                    </div>
+                    <!-- /message item -->
+                    <!-- message item -->
+                  </div>
+                  <!-- /.list-group-messages -->
+                </section>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center mt-4">
+
+                        <li class="page-item disabled">
+                          <a class="page-link"  tabindex="-1">
+                            <i class="fa fa-lg fa-angle-left"></i>
+                          </a>
+                        </li>
+            {% for page_num in message_post.iter_pages(left_edge=3, right_edge=3, left_current=3, right_current=3) %}
+                     {% if page_num%}
+                        <li class="page-item">
+                          <a class="page-link" href="{{url_for('employees.dashboard',page=page_num)}}">{{page_num}}</a>
+                        </li>
+                      {%else%}
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1">...</a>
+                        </li>
+                      {%endif%}
+              {%endfor%}
+                        <li class="page-item">
+                          <a class="page-link">
+                            <i class="fa fa-lg fa-angle-right"></i>
+                          </a>
+                        </li>
+
+                      </ul>
+</nav>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "mail/base.html" %}
+
+{% block body %}
+<p>Hi {{ user.username }}! {{message_email}}.</p>
+
+<p>To accept or reject the request, please click on this link: <br>
+{{config.HOSTNAME}}/{{user.username}}/{{post_id}}/{{post_rem_id}}/qrcode_user_approval
+</p>
+{% endblock %}

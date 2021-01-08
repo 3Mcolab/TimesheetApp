@@ -1,0 +1,43 @@
+{% extends "/admin/basic.html" %}
+{% block content %}
+<header class="page-title-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">
+        <a href="{{url_for('adminDash.dash_admin')}}">
+          <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Clock-In Out Approval</a>
+      </li>
+    </ol>
+  </nav>
+  <span><font size="6" >Timesheets Approval</font></span>
+</header>
+
+<div class="container">
+
+  {% for post in clock_posts.items %}
+
+  <div class="card" >
+
+    <div class="card-body">
+      <h2><a class="card-title" href="{{ url_for('adminDash.clockapproval', clock_post_id=post.id) }}">{{ post.author.firstname }}  {{ post.author.lastname }}</a></h2>
+      <p>Created on: {{ post.date.strftime('%Y-%m-%d') }}</p>
+      <p class="card-text">Project: {{ post.project}}  On:{{ post.day_clock}}</p>
+      <a href="{{ url_for('adminDash.clockapproval', clock_post_id=post.id) }}" class="btn btn-primary">View Details</a>
+    </div>
+  </div>
+
+ {% endfor %}
+
+ <nav aria-label="Page navigation example">
+   <ul class="pagination justify-content-center">
+     {% for page_num in clock_posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if clock_posts.page == page_num %}
+        <li class="page-item disabled">
+          <a class="page-link" href="{{ url_for('adminDash.clockpost_user', page=page_num) }}">{{ page_num }}</a></li>
+        </li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="{{ url_for('adminDash.clockpost_user', page=page_num) }}">{{ page_num }}</a></li>
+        {% endif %}
+    {% endfor %}
+  </nav>
+{% endblock %}

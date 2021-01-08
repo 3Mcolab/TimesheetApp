@@ -1,0 +1,63 @@
+{% extends "/users/basic_dash.html" %}
+{% block content %}
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{{url_for('employees.dashboard')}}">
+                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>{{current_user.firstname}} {{current_user.lastname}}</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header>
+              <!-- .page-title-bar -->
+              <!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <!-- page content goes here -->
+                <div class="row">
+                  <div class="col-lg-4">
+                    <!-- .card -->
+                    <div class="card card-fluid">
+                      <h6 class="card-header"> Your Details </h6>
+                      <!-- .nav -->
+                      <nav class="nav nav-tabs flex-column">
+                        <a href="{{url_for('users.profile_selection')}}" class="nav-link">Profile</a>
+                        <a href="{{url_for('users.account_setting')}}" class="nav-link  active">Account</a>
+                      </nav>
+                      <!-- /.nav -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                  <div class="col-lg-8">
+                    <!-- .card -->
+                    <div class="card card-fluid">
+                      <h6 class="card-header">Account </h6>
+                      <!-- .card-body -->
+                      <div class="card-body">
+                        <form method="POST" action="{{url_for('users.account_setting')}}">
+                          {{ form.hidden_tag() }}
+                          <div class="form-row">
+                            <label for="passtag" class="col-md-3">{{ form.password.label }}</label>
+                            <div class="col-md-9 mb-3">
+                              {{ form.password(class="form-control") }}
+                              {% for error in form.password.errors %}
+                              <span style="color:red;">[{{error}}]</span>
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <label for="pass_confirm_tag" class="col-md-3">{{ form.pass_confirm.label }}</label>
+                            <div class="col-md-9 mb-3">
+                              {{ form.pass_confirm(class="form-control") }}
+                              {% for error in form.pass_confirm.errors %}
+                              <span style="color:red;">[{{error}}]</span>
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="form-actions">
+                            <button type="submit" class="btn btn-primary ml-auto">{{form.submit.label}}</button>
+                          </div>
+                      </form>
+                </div>
+{% endblock %}

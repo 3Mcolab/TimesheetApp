@@ -1,0 +1,77 @@
+{% extends "/admin/basic.html" %}
+{% block content %}
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{{url_for('adminDash.view_alluser')}}">
+                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>View User</a>
+                    </li>
+                  </ol>
+                </nav>
+                <span><font size="6">Create an account</font></span>
+              </header>
+              <!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <div class="d-xl-none">
+                  <button class="btn btn-danger btn-floated" type="button" data-toggle="sidebar">
+                    <i class="fa fa-th-list"></i>
+                  </button>
+                </div>
+                <!-- .card -->
+                <section id="base-style" class="card">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <!-- .form -->
+                    <form  method="POST" action="#">
+                    {{ form.hidden_tag() }}  <!-- .fieldset -->
+
+                    <div class="form-group">
+                      <label for="email_tag">{{ form.email.label }}</label>
+                      {{ form.email(class="form-control") }}
+                      {% for error in form.email.errors %}
+                      <span style="color:red;">[{{error}}]</span>
+                      {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="username_tag">{{ form.username.label }}</label>
+                      {{ form.username(class="form-control") }}
+                      {% for error in form.username.errors %}
+                      <span style="color:red;">[{{error}}]</span>
+                      {% endfor %}
+                      <small class="text-muted">Choose first letter capital for username </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="myform">Select User Status</label>
+                         <select id="myform" name='form_user_check' class="form-control">
+                           {%for user_check_init in user_check%}
+                           <option> {{user_check_init}}</option>
+                           {%endfor%}
+                         </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="pass_tag">{{ form.password.label }}</label>
+                      {{ form.password(class="form-control") }}
+                      {% for error in form.password.errors %}
+                      <span style="color:red;">[{{error}}]</span>
+                      {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="pass_confirm_tag">{{ form.pass_confirm.label }}</label>
+                      {{ form.pass_confirm(class="form-control") }}
+                      {% for error in form.pass_confirm.errors %}
+                      <span style="color:red;">[{{error}}]</span>
+                      {% endfor %}
+                    </div>
+                      <div class="form-actions">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                      </div>
+                    </form>
+
+                  </div>
+        </div>
+{% endblock %}

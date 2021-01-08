@@ -1,0 +1,11 @@
+{% extends "mail/base.html" %}
+
+{% block body %}
+<p>Hi {{ user.username }}! Your task assigned has been modified for {{day.strftime('%d/%m/%Y')}}. Here are the changes:</p>
+
+<p>Project:{{project}} <br>
+   Start Time: {{time_in.strftime('%H:%M')}} <br>
+   End Time: {{time_out.strftime('%H:%M')}} <br>
+   Comment: {{comment}}
+ </p>
+{% endblock %}

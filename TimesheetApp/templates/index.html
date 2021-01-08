@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Homepage. </title>
+    <meta property="og:title" content="Sign In">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="http://uselooper.com">
+    <meta property="og:url" content="http://uselooper.com">
+    <!-- End SEO tag -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/profile_pics/tradepeer_new_logo.png">
+    <link rel="shortcut icon" href="/static/profile_pics/tradepeer_new_logo.png">
+    <meta name="theme-color" content="#3063A0">
+    <!-- BEGIN BASE STYLES -->
+    <link rel="stylesheet" href="/static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/vendor/fontawesome/css/fontawesome.all.css">
+    <!-- END BASE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="/static/assets/stylesheets/main.min.css">
+    <link rel="stylesheet" href="/static/assets/stylesheets/custom.css">
+    <!-- END THEME STYLES -->
+  </head>
+  <body>
+
+   <!-- .auth -->
+    <main class="auth auth-floated">
+
+      <!-- form -->
+      <div class="auth-form">
+        <div class="mb-4">
+          <div class="mb-3">
+            <br>
+            <br>
+            <img class="rounded" src="/static/profile_pics/tradepeer_new_logo.png" alt="" height="72"> </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h6 class="display-4" align="center"><font color="#0076a8">Portal</font></h6>
+        {% if current_user.is_authenticated %}
+        <div class="form-group text-center">
+          <form class="" action="{{url_for('users.logout')}}" method="">
+            <button class="btn btn-lg btn-info btn-block" type="submit">Sign Out</button>
+            </form>
+            <br>
+            <form class="" action="{{url_for('users.dash_home')}}" method="">
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Home</button>
+              </form>
+        </div>
+        {% else %}
+        <div class="form-group text-center">
+          <form class="" action="{{url_for('users.login')}}" method="">
+            <button class="btn btn-lg btn-info btn-block" type="submit">Sign In</button>
+            </form>
+        </div>
+       {% endif %}
+     </div>
+      <!-- /.auth-form -->
+      <!-- .auth-announcement -->
+      <section id="announcement" class="auth-announcement");">
+        <div class="announcement-body">
+          <br>
+          <br>
+          <br>
+          <br>
+          <h6 class="display-4" align="center">Timesheets</h6>
+          <h6 class="display-4" align="center">Portal</h6>
+        </div>
+      </section>
+      <!-- /.auth-announcement -->
+
+    </main>
+    <!-- /.auth -->
+    <!-- BEGIN PLUGINS JS -->
+    <!-- END PLUGINS JS -->
+  </body>
+</html>

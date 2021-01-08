@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Registration Sign Up </title>
+    <meta property="og:title" content="Password Reset">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="http://uselooper.com">
+    <meta property="og:url" content="http://uselooper.com">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <!-- End SEO tag -->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/profile_pics/tradepeer_new_logo.png">
+    <link rel="shortcut icon" href="/static/profile_pics/tradepeer_new_logo.png">
+    <meta name="theme-color" content="#3063A0">
+    <!-- BEGIN BASE STYLES -->
+    <link rel="stylesheet" href="/static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/vendor/fontawesome/css/fontawesome.all.css">
+    <!-- END BASE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="/static/assets/stylesheets/main.min.css">
+    <link rel="stylesheet" href="/static/assets/stylesheets/custom.css">
+    <!-- END THEME STYLES -->
+  </head>
+  <body>
+    <!-- .auth -->
+    <main class="auth">
+      <!-- form -->
+      {% if error %}
+      <div class="alert alert-danger" role="alert">{{ error }}</div>
+      {% endif %}
+
+      {% if message %}
+      <div class="alert alert-success" role="alert">{{ message }}</div>
+      {% endif %}
+
+      <form class="auth-form auth-form-reflow" method="POST" action="">
+        <div class="text-center mb-4">
+          <div class="mb-4">
+            <img class="rounded" src="/static/profile_pics/tradepeer_logo.png" alt="" height="72"> </div>
+          <h1 class="h3"> Reset Password </h1>
+        </div>
+        {# This hidden_tag is a CSRF security feature. #}
+        {{ form.hidden_tag() }}
+        <p class="mb-4"> Please change your password. </p>
+        <!-- .form-group -->
+        <div class="form-group mb-4">
+          <label class="d-block text-left">{{ form.password.label }}</label>
+          {{ form.password(class="form-control form-control-lg") }}
+          {% for error in form.password.errors %}
+          <span style="color:red;">{{error}}</span>
+          {% endfor %}
+        </div>
+        <div class="form-group mb-4">
+          <label class="d-block text-left">{{ form.pass_confirm.label }}</label>
+          {{ form.pass_confirm(class="form-control form-control-lg") }}
+          {% for error in form.pass_confirm.errors %}
+          <span style="color:red;">{{error}}</span>
+          {% endfor %}
+        </div>
+        <!-- /.form-group -->
+        <!-- actions -->
+        <div class="form-group mb-4">
+          <button class="btn btn-lg btn-block btn-primary" type="submit">Reset Password</button>
+        </div>
+      </form>
+        <div class="d-block d-md-inline-block">
+          <form class="" action="{{url_for('users.login')}}" method="">
+            <button class="btn btn-block btn-light" type="submit">Return to signin</button>
+            </form>
+        </div>
+      <!-- /.auth-form -->
+      <footer class="auth-footer mt-5"> © 2018 All Rights Reserved.</footer>
+    </main>
+    <!-- /.auth -->
+    <!-- BEGIN BASE JS -->
+    <script src="/static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/popper.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- END BASE JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="/static/assets/javascript/main.min.js"></script>
+    <!-- END THEME JS -->
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "mail/base.txt" %}
+
+{% block body %}
+<p>Hi {{ user.username }}! Please View Your  Weekly Task Schedule</p>
+     <table class="table">
+       <tbody>
+       <tr>
+       {% for k in week_taskall.values() %}
+       {% for t in k.values()%}
+       <font size="4" color="black">{{t.day_week_nw}} {{t.day_week}} </font>
+       <br>
+        <font size="4" color="{{color_all[loop.index]}}">{{t.tk_project}}</font>
+        <br>
+        <font size="2" color="{{color_all[loop.index]}}">{{t.tk_start}}</font>
+        <font size="2" color="{{color_all[loop.index]}}">{{t.tk_end}}</font>
+        <br>
+        <font size="1" color="{{color_all[loop.index]}}">{{t.tk_comment}}</font>
+       <td>
+       {%endfor%}
+      </td>
+     </tr>
+
+     {% endfor %}
+     </tbody>
+   </table>
+{% endblock %}

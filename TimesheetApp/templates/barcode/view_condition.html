@@ -1,0 +1,82 @@
+{% extends "/admin/basic.html" %}
+{% block content %}
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{{url_for('barcode.create_condition')}}">
+                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>View Item Condition</a>
+                    </li>
+                  </ol>
+                </nav>
+                <span><font size="6">View Item Condition </font></span>
+              </header>
+              <!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <div class="d-xl-none">
+                  <button class="btn btn-danger btn-floated" type="button" data-toggle="sidebar">
+                    <i class="fa fa-th-list"></i>
+                  </button>
+                </div>
+                <!-- .card -->
+                <section id="base-style" class="card">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <div class="lits-group list-group-flush">
+                      <!-- .lits-group-item -->
+                      <!-- .table-responsive -->
+                                   <div class="table-responsive">
+                                     <!-- .table -->
+                                     <table class="table table-sm mb-0">
+                                       <!-- thead -->
+                                       <thead class="thead-">
+                                         <tr>
+                                           <th><font color="#0f1f94"> Condition</font></th>
+                                           <th><font color="#0f1f94"> Delete</font></th>
+                                         </tr>
+                                       </thead>
+                                       <!-- /thead -->
+                                       <!-- tbody -->
+                                       <tbody>
+                                         <!-- tr -->
+                                         <tr>
+                                           {% for post_in in post_data %}
+                                           <td> {{post_in.condition_add}} </td>
+                                           <td>
+                                               <button type="submit" class="far fa-trash-alt" data-toggle="modal" data-target="#del_modal{{post_in.id}}"></button>
+                                           </td>
+                                         </tr>
+                                         <!-- /.modal-->
+                                         <div class="modal modal-alert fade" id="del_modal{{post_in.id}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalAlertDangerLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title">
+                                                  <i class="fa fa-exclamation-triangle text-red mr-1"></i>Delete Item Condition</h5>
+                                              </div>
+                                              <div class="modal-body">
+                                                <p> Are you sure you want to delete {{post_in.condition_add}} condition? </p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                                <form action="{{url_for('barcode.delete_condition',post_id=post_in.id)}}" method="">
+                                                  <input class="btn btn-danger" type="submit" value="Delete">
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                         </div>
+                                         <!-- /.modal -->
+                                          {% endfor %}
+                                     </tbody>
+                                   </table>
+                                 </div>
+
+              <!-- .lits-group-item -->
+                    </div>
+
+
+                  </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "mail/base.html" %}
+
+{% block body %}
+<p>Hi {{ user.username }}! Rycon Electric Services has register an account for you.</p>
+
+<p>To confirm your registration, please click on this link: </br>
+{{config.HOSTNAME}}/confirm/{{user.username}}/{{user.confirmation_code}}
+</p>
+{% endblock %}

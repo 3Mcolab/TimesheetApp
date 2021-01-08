@@ -1,0 +1,117 @@
+{% extends "/users/basic_input.html" %}
+{% block content %}
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{{url_for('employees.dashboard')}}">
+                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Clock-In Out</a>
+                    </li>
+                  </ol>
+                </nav>
+                <span><font size="6">Enter your hours</font></span>
+              </header>
+              <!-- /.page-title-bar -->
+              <!-- .page-section -->
+              <div class="page-section">
+                <div class="d-xl-none">
+                  <button class="btn btn-danger btn-floated" type="button" data-toggle="sidebar">
+                    <i class="fa fa-th-list"></i>
+                  </button>
+                </div>
+                <!-- .card -->
+                <section id="base-style" class="card">
+                  <!-- .card-body -->
+                  <div class="card-body">
+                    <!-- .form -->
+                    <form  method="POST" action="{{url_for('employees.clockinout_selection')}}">
+                      <!-- .fieldset -->
+                      <fieldset>
+                        <legend>Project Details</legend>
+                        <div class="form-group">
+                          <label for="clockinout_projecttag">Project Name</label>
+                          <select class="form-control select2" name="clockinout_project" data-toggle="select2">
+                           <option> Choose... </option>
+                           {%for project_init in project_all%}
+                           <option value="{{project_init.project_add}}"> {{project_init.project_add}} </option>
+                           {%endfor%}
+                         </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="clockinout_tasktag">Tasks</label>
+                          <select class="form-control select2" name="clockinout_site" data-toggle="select2">
+                            <option> Choose... </option>
+                            {%for task_init in task_all%}
+                            <option value="{{task_init}}"> {{task_init}} </option>
+                            {%endfor%}
+                         </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="flatpickr01">Select Day</label>
+                          <input id="flatpickr01" type="text" class="form-control" name="clockinout_fromD" required="" value="">
+                        </div>
+                        <div class="form-group">
+                          <label>Enter Clock In/Out Time</label>
+                          <br>
+                          <label class="control-label" for="flatpickr08">From </label>
+                          <input id="flatpickr08" type="text" class="form-control" name="clockinout_fromT" value="">
+                          <label class="control-label" for="flatpickr09">To</label>
+                          <input id="flatpickr09" type="text" class="form-control" name="clockinout_toT" value="">
+                        </div>
+
+                        <div class="form-group">
+                          <label>Meal Allowance?</label>
+                          <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="meal_allowance" id="yestag" value="yes" >
+                            <label class="custom-control-label" for="yestag">Yes</label>
+                          </div>
+                          <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="meal_allowance" id="notag" value="no" checked>
+                            <label class="custom-control-label" for="notag">No</label>
+                          </div>
+
+                        </div>
+
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                          <label>Did you Travel?</label>
+                          <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="clockinout_travelch" id="travel_yestag" value="yes" >
+                            <label class="custom-control-label" for="travel_yestag">Yes</label>
+                          </div>
+                          <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="clockinout_travelch" id="travel_notag" value="no" checked>
+                            <label class="custom-control-label" for="travel_notag">No</label>
+                          </div>
+
+                        </div>
+                        <div class="form-group">
+                          <label>If Yes?</label>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label for="clockinout_distancetag">Travel Distance >50 kms</label>
+                              <input type="number" class="form-control" id="clockinout_distancetag" name="clockinout_distance" value="">
+                            </div>
+                            <div class="col-md-6">
+                              <label for="clockinout_locationtag">Where From?</label>
+                              <input type="text" class="form-control" id="clockinout_locationtag" name="clockinout_location" value="">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="clockinout_commentag">Any Comment?</label>
+                          <textarea class="form-control" id="clockinout_commentag" name="clockinout_comment" rows="2" cols="2"></textarea>
+                        </div>
+                        <!-- /.form-group -->
+                      </fieldset>
+                      <!-- /.fieldset -->
+                      <div class="form-actions">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                      </div>
+                    </form>
+
+                  </div>
+        </div>
+
+         <script src="/static/assets/javascript/app.min.js"></script>
+{% endblock %}

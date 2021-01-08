@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  </head>
+  <body>
+
+   <!-- .auth -->
+    <main class="auth auth-floated">
+
+      <!-- form -->
+      <form class="auth-form" method="POST" action="">
+        {% include 'includes/_messages.html' %}
+        <div class="mb-4">
+          <div class="mb-3">
+              <img class="rounded" src="/static/profile_pics/com_logo.png" alt="" height="72"> </div>
+          <h1 class="h3"> Sign In </h1>
+        </div>
+        {# This hidden_tag is a CSRF security feature. #}
+        {{ form.hidden_tag() }}
+        <!-- .form-group -->
+        <div class="form-group mb-4">
+          <label class="d-block text-left">{{ form.email.label }}</label>
+          {{ form.email(class="form-control form-control-lg") }}
+          {% for error in form.email.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <div class="form-group mb-4">
+          <label class="d-block text-left">{{ form.password.label }}</label>
+          {{ form.password(class="form-control form-control-lg") }}
+          {% for error in form.password.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group mb-4">
+          <button class="btn btn-lg btn-info btn-block" type="submit">Sign In</button>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group text-center">
+          <div class="custom-control custom-control-inline custom-checkbox">
+            <p>{{form.remember_me()}} {{form.remember_me.label}}</p>
+          </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- recovery links -->
+        <p class="py-3">
+          <a href="{{url_for('users.forgot')}}" class="link">Forgot Password?</a>
+        </p>
+        <!-- /recovery links -->
+        </p>
+      </form>
+      <!-- /.auth-form -->
+      <!-- .auth-announcement -->
+  </body>
+</html>

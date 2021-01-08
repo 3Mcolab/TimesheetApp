@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+  </head>
+  <body>
+    <!-- .app -->
+    <div class="app">
+      <!-- .app-header -->
+      <header class="app-header">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="#">
+              <img src="/static/assets/images/app_logo.png" height="32" alt="">
+            </a>
+          </div>
+          <!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <!-- toggle menu -->
+              <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+              <!-- /toggle menu -->
+            </div>
+            <!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-full">
+              <!-- .top-bar-search -->
+              <div class="top-bar-search">
+                <div class="input-group input-group-search">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <span class="oi oi-magnifying-glass"></span>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search"> </div>
+              </div>
+              <!-- /.top-bar-search -->
+            </div>
+            <!-- /.top-bar-item -->
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+              <div class="dropdown">
+                <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="user-avatar">
+                    <img src="/static/assets/images/avatars/profile.png" alt="">
+                  </span>
+                  <span class="account-summary pr-lg-4 d-none d-lg-block">
+                    <span class="account-name">{{current_user.firstname}} {{current_user.lastname}}</span>
+                    <span class="account-description">{{current_user.position}}</span>
+                  </span>
+                </button>
+                <div class="dropdown-arrow dropdown-arrow-left"></div>
+                <!-- .dropdown-menu -->
+                <div class="dropdown-menu">
+                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> {{current_user.firstname}} {{current_user.lastname}}  </h6>
+                    <a class="dropdown-item" href="{{url_for('employees.dashboard')}}">
+                      <span class="dropdown-icon fas fa-lock-open"></span> User Dashboard</a>
+                    <a class="dropdown-item" href="{{url_for('users.logout')}}">
+                      <span class="dropdown-icon fas fa-sign-out-alt"></span> Logout</a>
+              </div>
+              <!-- /.btn-account -->
+            </div>
+            <!-- /.top-bar-item -->
+          </div>
+          <!-- /.top-bar-list -->
+        </div>
+        <!-- /.top-bar -->
+      </header>
+      <!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside">
+        <!-- .aside-content -->
+        <div class="aside-content">
+          <!-- .aside-header -->
+          <header class="aside-header d-block d-md-none">
+            <!-- .btn-account -->
+            <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
+              <span class="user-avatar user-avatar-lg">
+                <img src="/static/assets/images/avatars/profile.png" alt="">
+              </span>
+              <span class="account-icon">
+                <span class="fa fa-caret-down fa-lg"></span>
+              </span>
+              <span class="account-summary">
+                <span class="account-name">{{current_user.firstname}} {{current_user.lastname}}</span>
+                <span class="account-description">{{current_user.position}}</span>
+              </span>
+            </button>
+            <!-- /.btn-account -->
+            <!-- .dropdown-aside -->
+            <div id="dropdown-aside" class="dropdown-aside collapse">
+              <!-- dropdown-items -->
+              <div class="pb-3">
+                  <a class="dropdown-item" href="{{url_for('employees.dashboard')}}">
+                    <span class="dropdown-icon fas fa-lock-open"></span> User Dashboard</a>
+                <a class="dropdown-item" href="{{url_for('users.logout')}}">
+                  <span class="dropdown-icon fas fa-sign-out-alt"></span> Logout</a>
+              </div>
+              <!-- /dropdown-items -->
+            </div>
+            <!-- /.dropdown-aside -->
+          </header>
+          <!-- /.aside-header -->
+          <!-- .aside-menu -->
+          <section class="aside-menu has-scrollable">
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu">
+              <!-- .menu -->
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="{{url_for('adminDash.dash_admin')}}" class="menu-link">
+                    <span class="menu-icon fas fa-desktop"></span>
+                    <span class="menu-text">Dashboard</span>
+                  </a>
+                </li>
+                <li class="menu-item has-child">
+                  <a href="{{url_for('adminDash.dash_admin')}}" class="menu-link">
+                    <span class="menu-icon fas fa-cogs"></span>
+                    <span class="menu-text">Settings</span>
+                  </a>                  <!-- child menu -->
+                  <ul class="menu">
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Task</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.create_task')}}" class="menu-link">Create</a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.view_task')}}" class="menu-link">View</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">User</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.register')}}" class="menu-link">Register</a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.view_alluser')}}" class="menu-link">View</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item ">
+                      <a href="{{url_for('adminDash.project_permission')}}" class="menu-link">Project Permission</a>
+                    </li>
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Reminder</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.birthday_remainder')}}" class="menu-link">Upcoming Birthday</a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.leave_remainder')}}" class="menu-link">Upcoming Leave</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Accounting Code</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.create_invoice')}}" class="menu-link">Create</a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.view_invoice')}}" class="menu-link">View</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Public Holiday</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.public_holiday')}}" class="menu-link">Create</a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.view_publicHoliday')}}" class="menu-link">View</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Allowance Selection</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.create_allowance')}}" class="menu-link">Create</a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="{{url_for('adminDash.view_allowance')}}" class="menu-link">View</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Job Safety</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">PPE</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.create_PPE')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.view_PPE')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">SWMS</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.create_SWMS')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.view_SWMS')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">Common Hazards</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.create_hazard_common')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.view_Risk_COM')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">High Risk Hazards</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.create_hazard_HR')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('jobsafety.view_Risk_HR')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item has-child">
+                      <a href="#" class="menu-link">Inventory</a>
+                      <!-- grand child menu -->
+                      <ul class="menu">
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">Assets</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.create_asset')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.view_asset')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">Vendor</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.create_vendor')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.view_vendor')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">Items</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.create_itemname')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.view_itemname')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item has-child">
+                          <a href="#" class="menu-link">Conditions</a>
+                          <ul class="menu">
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.create_condition')}}" class="menu-link">Create</a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="{{url_for('barcode.view_condition')}}" class="menu-link">View</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item has-child">
+                  <a href="#" class="menu-link">
+                    <span class="menu-icon fas fa-calendar-alt"></span>
+                    <span class="menu-text">Schedule Task</span>
+                  </a>                  <!-- child menu -->
+                  <ul class="menu">
+                    <li class="menu-item">
+                      <a href="{{url_for('adminDash.task_schedule')}}" class="menu-link">Post</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('adminDash.admin_task_view')}}" class="menu-link">Daily View</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('adminDash.weekly_view_task')}}" class="menu-link">Week View</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="menu-item has-child">
+                  <a href="#" class="menu-link">
+                    <span class="menu-icon fas fa-project-diagram"></span>
+                    <span class="menu-text">Project</span>
+                  </a>                  <!-- child menu -->
+                  <ul class="menu">
+                    <li class="menu-item">
+                      <a href="{{url_for('adminDash.create_project')}}" class="menu-link">Create</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('adminDash.view_allproject')}}" class="menu-link">Ongoing</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{{url_for('adminDash.view_archive_project')}}" class="menu-link">Archive</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="{{url_for('adminDash.event_schedule')}}" class="menu-link">
+                    <span class="menu-icon far fa-calendar-alt"></span>
+                    <span class="menu-text">Schedule Event</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="{{url_for('adminDash.timesheet_view_all')}}" class="menu-link">
+                    <span class="menu-icon fas fa-tachometer-alt"></span>
+                    <span class="menu-text">TimeSheets</span>
+                  </a>
+              </li>
+              <li class="menu-item">
+                <a href="{{url_for('adminDash.leave_view_new',sheet_inx='default')}}" class="menu-link">
+                  <span class="menu-icon far fa-calendar"></span>
+                  <span class="menu-text">Leave Requests</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="{{url_for('adminDash.invoice_view_new',sheet_inx='default')}}" class="menu-link">
+                  <span class="menu-icon fas fa-donate"></span>
+                  <span class="menu-text">Reimbursements</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="{{url_for('jobsafety.view_jobsafety_admin')}}" class="menu-link">
+                  <span class="menu-icon fas fa-exclamation-triangle"></span>
+                  <span class="menu-text">Job Safety</span>
+                </a>
+              </li>
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link">
+                  <span class="menu-icon fas fa-toolbox"></span>
+                  <span class="menu-text">Tool Inventory</span>
+                </a>
+                <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.view_inventory_all_admin')}}" class="menu-link">Find Item</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('barcode.history_view_all_admin')}}" class="menu-link">Track Item</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link">
+                  <span class="menu-icon fas fa-share-square"></span>
+                  <span class="menu-text">Report Error</span>
+                </a>
+                <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{{url_for('adminDash.enquiry_post_admin')}}" class="menu-link">Create</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{{url_for('adminDash.view_enquiry')}}" class="menu-link">View</a>
+                  </li>
+                </ul>
+              </li>
+
+                </li>
+              </ul>
+              <!-- /.menu -->
+            </nav>
+            <!-- /.stacked-menu -->
+          </section>
+          <!-- /.aside-menu -->
+        </div>
+        <!-- /.aside-content -->
+      </aside>
+      <!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+              <div class="page-inner">
+                {% include 'includes/_messages.html' %}
+                {{ moment.include_jquery() }}
+                {{ moment.include_moment() }}
+                {% block content %}
+
+                {% endblock %}
+              </div>
+          </div>
+        </div>
+
+      </main>
+      <!-- /.app-main -->
+    </div>
+    <!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <!-- END PAGE LEVEL JS -->
+  </body>
+</html>
