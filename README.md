@@ -1,1 +1,1 @@
-
+Online cloud based time tracking and productivity tools to monitor the remote team by easily check their clock in, clock out, and how much time they spend on particular project. Admin can monitor the productivity of their employees to monitor the time spent on specific projects of specific employees.
