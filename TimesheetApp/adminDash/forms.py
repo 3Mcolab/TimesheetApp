@@ -34,21 +34,12 @@ class TaskForm(FlaskForm):
     task_add = StringField('Task', validators=[DataRequired()])
     submit = SubmitField('Add')
 
-class BirthDayForm(FlaskForm):
-    daybirthrem = StringField('Enter Day', validators=[DataRequired()])
-    submit = SubmitField('Add')
-
 class LeaveRemForm(FlaskForm):
     dayleaverem = StringField('Enter Day', validators=[DataRequired()])
     submit = SubmitField('Add')
 
 class InvoiceForm(FlaskForm):
     invoice_add = StringField('Accounting Code', validators=[DataRequired()])
-    submit = SubmitField('Add')
-
-class AllowanceForm(FlaskForm):
-    allowance_add = StringField('Allowance Type', validators=[DataRequired()])
-    allocate_rate = FloatField('Rate $',validators=[DataRequired(False)])
     submit = SubmitField('Add')
 
 class ChangePasswordForm(FlaskForm):
